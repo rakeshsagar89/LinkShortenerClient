@@ -8,9 +8,11 @@ function App() {
 
   console.log(process.env.REACT_APP_API_BASE_URL, "url");
 
+  const API_BASE_URL = 'https://link-shortener-server-wa7c.onrender.com';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(`https://link-shortener-server-wa7c.onrender.com/shorten`, {
+    const res = await fetch(`${API_BASE_URL}/shorten`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -28,7 +30,7 @@ function App() {
       const short = await response.text();
       const code = short.split('/').pop();
       if (response.status === 0) {
-        const location = `https://link-shortener-server-wa7c.onrender.com/${code}`;   //response.url ||
+        const location = `${API_BASE_URL}/${code}`;   //response.url ||
         window.open(location, "_blank");
       } else
         if (response.status === 302) {
@@ -61,7 +63,7 @@ function App() {
         <p style={{ textAlign: 'center', marginTop: '2%' }}>
           Short URL:{" "}
           <button onClick={() => handleRedirect(shortUrl)} style={{ cursor: "pointer", color: "blue", textDecoration: "underline", background: "none", border: "none" }}>
-            {shortUrl}
+          {`${API_BASE_URL}/${shortCode}`}
           </button>
         </p>
       )}
