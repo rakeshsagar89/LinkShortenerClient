@@ -6,9 +6,11 @@ function App() {
   const [originalUrl, setOriginalUrl] = useState('');
   const [shortUrl, setShortUrl] = useState('');
 
+  console.log(process.env.REACT_APP_API_BASE_URL, "url");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/shorten`, {
+    const res = await fetch(`https://link-shortener-server-wa7c.onrender.com/shorten`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -23,10 +25,10 @@ function App() {
   const handleRedirect = async (shortUrl) => {
     try {
       const response = await fetch(shortUrl, { method: "GET", redirect: "manual" });
-
-      console.log("Response status:", response);
+      const short = await response.text();
+      const code = short.split('/').pop();
       if (response.status === 0) {
-        const location = response.url;
+        const location = `https://link-shortener-server-wa7c.onrender.com/${code}`;   //response.url ||
         window.open(location, "_blank");
       } else
         if (response.status === 302) {
@@ -37,7 +39,8 @@ function App() {
           alert("This link has expired. Please Generate Again");
         } else if (response.status === 404) {
           alert("URL does not exist.");
-          window.location.href = 'http://localhost:3000';
+          window.location.href = window.location.origin;
+          // window.location.href = 'http://localhost:3000';
         } else {
           alert("Unexpected response");
         }
