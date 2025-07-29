@@ -63,7 +63,7 @@ function App() {
         <p style={{ textAlign: 'center', marginTop: '2%' }}>
           Short URL:{" "}
           <button onClick={() => handleRedirect(shortUrl)} style={{ cursor: "pointer", color: "blue", textDecoration: "underline", background: "none", border: "none" }}>
-          {`${API_BASE_URL}/${shortCode}`}
+          {`${API_BASE_URL}/${shortUrl}`}
           </button>
         </p>
       )}
