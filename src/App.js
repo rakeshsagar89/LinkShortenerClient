@@ -27,10 +27,11 @@ function App() {
   const handleRedirect = async (shortUrl) => {
     try {
       const response = await fetch(shortUrl, { method: "GET", redirect: "manual" });
-      const short = await response.text();
-      const code = short.split('/').pop();
+      // const short = await response.text();
+      // const code = short.split('/').pop();
+      console.log(response,"response");
       if (response.status === 0) {
-        const location = `${API_BASE_URL}/${code}`;   //response.url ||
+        const location = response.url;   //response.url ||
         window.open(location, "_blank");
       } else
         if (response.status === 302) {
