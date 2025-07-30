@@ -32,7 +32,8 @@ function App() {
       console.log(response,"response");
       if (response.status === 0) {
         const location = response.url;   //response.url ||
-        window.open(location, "_blank");
+        // window.open(location, "_blank");
+        window.location.href = location;
       } else
         if (response.status === 302) {
           const location = response.url;
