@@ -27,11 +27,9 @@ function App() {
   const handleRedirect = async (shortUrl) => {
     try {
       const response = await fetch(shortUrl, { method: "GET", redirect: "manual" });
-      // const short = await response.text();
-      // const code = short.split('/').pop();
       console.log(response,"response");
       if (response.status === 0) {
-        const location = response.url;   //response.url ||
+        const location = response.url;
         // window.open(location, "_blank");
         window.location.href = location;
       } else
